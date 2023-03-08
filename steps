@@ -1,0 +1,16 @@
+!- install flask
+2- pip install Flask-SQLAlchemy
+3-  pip install flask-shell-ipython
+
+######## config file
+---> will contain database configuration
+
+
+
+############ create models ,
+
+
+
+
+
+
