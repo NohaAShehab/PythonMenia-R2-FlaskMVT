@@ -13,7 +13,8 @@ class DevelopmentConfig(Config):
 
 class ProductionConfig(Config):
     DEBUG= False
-    SQLALCHEMY_DATABASE_URI = "sqlite:///example.sqlite"
+    # postgresql:://username:password@localhost:portnumber/dbname
+    SQLALCHEMY_DATABASE_URI = "postgresql://pythonmenair2:iti@localhost:5432/menia_flask"
 
 
 

@@ -1,10 +1,10 @@
 
 
 from flask import  Flask
+from flask_migrate import Migrate
 from  app.models import  db
 from app.config import  projectConfig as AppConfig   # this dict
-from app.models import Student
-
+from app.models import Student,Department
 
 def create_app(config_name):
     app = Flask(__name__)
@@ -14,6 +14,9 @@ def create_app(config_name):
 
     app.config.from_object(current_config)
     db.init_app(app)
+
+    ## add migration
+    migrate = Migrate(app, db, render_as_batch=True)
 
     ### add route
     from app.students.views import testfunction,students_index, student_info, student_delete
