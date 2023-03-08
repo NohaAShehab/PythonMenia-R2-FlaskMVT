@@ -3,6 +3,7 @@
 from flask import  Flask
 from  app.models import  db
 from app.config import  projectConfig as AppConfig   # this dict
+from app.models import Student
 
 
 def create_app(config_name):
@@ -15,8 +16,16 @@ def create_app(config_name):
     db.init_app(app)
 
     ### add route
-    from app.students.views import index
-    app.add_url_rule('/students', view_func=index)
+    from app.students.views import testfunction,students_index, student_info, student_delete
+    from app.students.errors import page_not_found
+
+
+    app.add_url_rule('/test', view_func=testfunction)
+    app.register_error_handler(404, page_not_found)
+    app.add_url_rule('/students', view_func=students_index)
+    app.add_url_rule('/students/<id>', view_func=student_info)
+    app.add_url_rule('/students/<id>/delete', view_func=student_delete)
+
 
     return  app
 
