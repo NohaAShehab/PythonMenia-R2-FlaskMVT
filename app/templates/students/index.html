@@ -24,8 +24,8 @@
                   <td>{{std.email}}</td>
                   <td>{{std.accepted}}</td>
 
-                <td><a href="{{url_for('student_info', id=std.id)}}" class="btn btn-info"> Show</a></td>
-                <td><a href="{{url_for('student_delete', id=std.id)}}" class="btn btn-danger"> Delete</a></td>
+                <td><a href="{{url_for('students.student_info', id=std.id)}}" class="btn btn-info"> Show</a></td>
+                <td><a href="{{url_for('students.delete', id=std.id)}}" class="btn btn-danger"> Delete</a></td>
 
             </tr>
         {% endfor %}

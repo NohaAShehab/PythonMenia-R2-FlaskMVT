@@ -10,6 +10,13 @@ class Department(db.Model):
     ##### db.relationship("ModelName", -----)
     students = db.relationship('Student', backref='department', lazy=True)
 
+    def __str__(self):
+        return f"{self.name}"
+
+    @classmethod
+    def get_all_departments(cls):
+        return cls.query.all()
+
 
 class Student(db.Model):
     id = db.Column(db.Integer, primary_key=True)
