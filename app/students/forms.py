@@ -3,7 +3,6 @@ from wtforms import StringField, IntegerField
 from wtforms.validators import DataRequired, ValidationError
 from app.models import Student
 from wtforms.widgets import CheckboxInput
-
 from wtforms import BooleanField
 
 class StudentForm(FlaskForm):

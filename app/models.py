@@ -18,6 +18,7 @@ class Department(db.Model):
         return cls.query.all()
 
 
+
 class Student(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100))
@@ -38,5 +39,27 @@ class Student(db.Model):
 
     def delete_object(self):
         db.session.delete(self)
+        db.session.commit()
+        return True
+
+    @classmethod
+    def create_student(cls, student_data):
+        student = cls(**student_data)
+        db.session.add(student)
+        db.session.commit()
+        return student
+
+    @classmethod
+    def get_specific_student(cls, id):
+        return cls.query.get(id)
+
+
+    def update_student(self, updated_data):
+        self.name = updated_data["name"]
+        self.email = updated_data["email"]
+        self.dept_id = updated_data["dept_id"]
+        self.accepted = updated_data["accepted"]
+        self.age =updated_data['age']
+        db.session.add(self)
         db.session.commit()
         return True

@@ -6,6 +6,10 @@ from  app.models import  db
 from app.config import  projectConfig as AppConfig   # this dict
 from app.models import Student,Department
 
+from app.students.api.api_views import HelloWorld,StudentList, StudentOperation
+
+from flask_restful import  Api
+
 def create_app(config_name):
     app = Flask(__name__)
     current_config = AppConfig[config_name]  # class
@@ -36,6 +40,17 @@ def create_app(config_name):
     # app.add_url_rule('/departments', view_func=department_index, endpoint='departments_all')
     app.register_blueprint(departments_blueprint)
     app.register_blueprint(students_blueprint)
+
+
+    ################## APIs
+    ## app will use flask rest
+    api = Api(app)
+    ### add resource class
+    api.add_resource(HelloWorld, '/api/hello')
+    api.add_resource(StudentList, '/api/students')
+    api.add_resource(StudentOperation, '/api/students/<int:id>')
+
+
 
     return  app
 
