@@ -1,0 +1,42 @@
+{% extends 'base.html'%}
+
+{% block content %}
+<link rel="stylesheet" href="{{url_for('static', filename='css/mystyle.css') }}">
+    <div>
+
+        <h1>Create Student using forms </h1>
+{{form}}
+
+
+        <form method="POST">
+            {{form.csrf_token}}
+  <div class="mb-3">
+      <div class="form-label"> {{form.name.label}}  </div>
+      {{form.name(size=20, value=name, class='form-control')}}
+              <p class="text-danger"> {% if errors and errors['name'] %}  {{errors['name']}} {%endif%} </p>
+
+  </div>
+    <div class="mb-3">
+      <div class="form-label"> {{form.email.label}}  </div>
+      {{form.email( value=email, class='form-control')}}
+
+  </div>
+
+            <div class="mb-3">
+
+    <div class="mb-3" class="form-label" > {{form.accepted.label}}
+        {{form.accepted( value=accepted, class='')}} </div>
+
+    </div>
+    <div class="mb-3">
+      <div class="form-label"> {{form.age.label}}  </div>
+      {{form.email( value=age, class='form-control', value=age )}}
+  </div>
+
+
+
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+    </div>
+{% endblock %}

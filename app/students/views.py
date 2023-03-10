@@ -1,6 +1,6 @@
 from app.models import Student,db
 from flask import  render_template, redirect, url_for, request
-
+from app.students.forms import StudentForm
 
 from app.students import  students_blueprint
 
@@ -70,4 +70,31 @@ def createStudent():
 
 
 
+
+
+@students_blueprint.route('/forms/create',endpoint='forms_create', methods=['GET','POST'])
+def createStudentUsingForm():
+    form  = StudentForm()
+    if request.method == 'GET':
+        return render_template('students/createform.html', form=form)
+    elif request.method == 'POST':
+        print(request.form)  # use request.form
+        requestdata = dict(request.form)
+        print(requestdata)
+        if not 'accepted' in requestdata:
+            requestdata['accepted']=False
+        else:
+            requestdata['accepted'] = True
+
+
+        request_errors = validateInputs(requestdata)
+        if request_errors:
+            return render_template('students/createform.html',errors=request_errors,form=form )
+        else:
+            del requestdata['csrf_token']
+            student = Student(**requestdata)
+            db.session.add(student)
+            db.session.commit()
+
+            return redirect(url_for('students.students_index'))
 
